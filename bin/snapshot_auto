@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+
+# Franklin Souza
+# @FranklinTech
+
+# Definir o diretório onde os snapshots serão armazenados
+snapshot_dir="/.snapshots"
+
+# Definir o prefixo do nome do snapshot
+snapshot_prefix="@snapshot-auto"
+
+# Definir o número máximo de snapshots a serem mantidos
+max_snapshots=7
+
+# Criar o diretório de snapshots se ainda não existir
+mkdir -p "$snapshot_dir"
+
+# Obter a data atual
+current_date=$(date +%Y-%m-%d_%H:%M:%S)
+
+# Criar o nome do snapshot com base na data atual
+snapshot_name="${snapshot_prefix}-${current_date}"
+
+# Criar o snapshot usando o comando btrfs
+btrfs subvolume snapshot / "$snapshot_dir/$snapshot_name"
+sudo grub-mkconfig -o /boot/grub/grub.cfg
+
+# Obter a lista de snapshots existentes
+snapshots=($(ls -1 "$snapshot_dir" | grep "$snapshot_prefix"))
+
+# Verificar se o número de snapshots excede o limite máximo
+if [ ${#snapshots[@]} -gt $max_snapshots ]; then
+    # Obter a data de 7 dias atrás
+    old_date=$(date -d "7 days ago" +%Y-%m-%d_%H:%M:%S)
+    
+    # Iterar sobre os snapshots e remover os antigos
+    for snapshot in "${snapshots[@]}"; do
+        snapshot_date=$(echo "$snapshot" | sed "s/$snapshot_prefix_//")
+        
+        if [ $snapshot_date -lt $old_date ]; then
+            # Remover o snapshot
+            btrfs subvolume delete "$snapshot_dir/$snapshot"
+        fi
+    done
+fi

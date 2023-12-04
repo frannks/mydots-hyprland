@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+# Verifica se o script é executado como root
+if [ "$EUID" -ne 0 ]
+  then echo "Este script deve ser executado como root."
+  exit
+fi
+
+# Define o diretório dos snapshots
+snapshot_dir="/.snapshots"
+
+# Lista todos os snapshots btrfs no diretório
+snapshots=$(sudo btrfs subvolume list $snapshot_dir | awk '{print $9}' | fzf -m)
+
+# Verifica se o usuário selecionou pelo menos um snapshot
+if [[ -z "$snapshots" ]]; then
+  clear && echo "Nenhum snapshot selecionado, saindo."
+  cd $HOME && exit 1
+fi
+
+# Loop pelos snapshots selecionados e os exclui
+for snapshot in $snapshots; do
+  clear && sudo btrfs subvolume delete "$snapshot_dir/$snapshot"
+  echo "Snapshot $snapshot removido com sucesso."
+done
+
+# Volta para o diretório home do usuário
+cd $HOME
+exit 0

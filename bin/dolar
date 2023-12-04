@@ -1,0 +1,13 @@
+#!/usr/bin/env python3
+
+import requests
+
+API = "https://economia.awesomeapi.com.br/last/USD-BRL"
+
+if __name__ == "__main__":
+    try:
+        x = requests.get(API).json()
+        value = x["USDBRL"]["bid"]
+        print('USD: R$ {:.4} '.format(value))
+    except:
+        print("Por favor tente novamente mais tarde.")

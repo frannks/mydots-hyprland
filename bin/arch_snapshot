@@ -1,0 +1,15 @@
+#!/usr/bin/env sh
+
+# Define o diretório em que os snapshots serão armazenados
+SNAPSHOT_DIR=/.snapshots
+
+# Define o nome do snapshot (usando a data e hora atual)
+DATE=$(date +%d-%m-%Y_%H:%M:%S)
+SNAPSHOT="@snapshot-$DATE"
+
+# Cria o snapshot
+sudo btrfs subvolume snapshot / "$SNAPSHOT_DIR/$SNAPSHOT"
+sudo grub-mkconfig -o /boot/grub/grub.cfg
+
+# Remove snapshots mais antigos
+#sudo btrfs subvolume delete $(btrfs subvolume list /.snapshots | grep -v "Info" | grep -v "$SNAPSHOT" | awk '{print $9}')

@@ -1,0 +1,65 @@
+#!/usr/bin/env bash
+
+# Franklin Souza
+# @FranklinTech
+
+clear
+
+# Packages
+[ ! `command -v wget` ] && echo "wget não instalado, por favor faça a instalação!!!" && exit 1
+[ ! `command -v fzf` ] && echo "fzf não instalado, por favor faça a instalação!!!" && exit 1
+[ ! `command -v unzip` ] && echo "unzip não instalado, por favor faça a instalação!!!" && exit 1
+
+while true ; do
+
+  # Variaveis view image
+  IMG1="catimg -r2 -w$COLUMNS"
+  IMG2="sxiv -g 512x512"
+  
+  mkdir $HOME/Wallpapers
+  DIR="$HOME/Wallpapers"
+  clear
+  printf "
+ ██████╗ ██╗   ██╗██╗    ██╗ █████╗ ██╗     
+ ██╔══██╗╚██╗ ██╔╝██║    ██║██╔══██╗██║     
+ ██████╔╝ ╚████╔╝ ██║ █╗ ██║███████║██║     
+ ██╔═══╝   ╚██╔╝  ██║███╗██║██╔══██║██║     
+ ██║        ██║   ╚███╔███╔╝██║  ██║███████╗
+ ╚═╝        ╚═╝    ╚══╝╚══╝ ╚═╝  ╚═╝╚══════╝
+                                           \n\n"
+
+  printf "Wallpaper definido: " && sed -n 3p ~/.cache/wal/colors.sh
+  printf "\n\nEscolha uma das opções abaixo:\n\n"
+  printf "[1] - Wallpaper random (Pywal)\n"
+  printf "[2] - Definir Wallpaper (Pywal)\n"
+  printf "[3] - Baixar WallPack\n"
+  printf "[4] - Sair\n\n"
+  read SELECTION
+
+  if [ $SELECTION == '1' ] || [ $SELECTION == '01' ] ; then
+
+     clear
+    my_array=($HOME/Wallpapers/*)
+    wal -i ${my_array[$(( $RANDOM % ${#my_array[@]}))]} && $HOME/.config/dunst/./launchdunst.sh && wal-telegram --wal && cat /home/frank/.cache/wal/colors-kitty.conf > ~/.config/kitty/theme.conf  && cat /home/frank/.cache/wal/colors-rofi-dark.rasi > ~/.config/rofi/config.rasi && swaybg -i "${array[@]}" &
+    read -p 'PRESS ENTER TO CONTINUE...' && continue
+
+  elif [ $SELECTION == '2' ] || [ $SELECTION == '02' ] ; then
+    IFS=$'\n'
+    mapfile -t array < <(find  ~/Wallpapers -regextype posix-egrep -regex '.*\.(jpg|png)' | \
+    fzf --preview="if [[ {} =~ ('.jpg'|'.JPG'|'.jpeg'|'.png'|'.PNG')$ ]]; then "$IMG1" {}; elif [ -d {} ]; then ls --color=always --group-directories-first -H {}; else nl -pba -w1 -s' ' {};fi" --query="$1" --multi --select-1 --exit-0)
+    [[ -n "${array[@]}" ]] && wal -i "${array[@]}" && $HOME/.config/dunst/./launchdunst.sh && wal-telegram --wal && cat /home/frank/.cache/wal/colors-kitty.conf > ~/.config/kitty/theme.conf && cat /home/frank/.cache/wal/colors-rofi-dark.rasi > ~/.config/rofi/config.rasi && swaybg -i "${array[@]}" &
+    read -p 'PRESS ENTER TO CONTINUE...' && continue
+
+  elif [ $SELECTION == '3' ] || [ $SELECTION == '03' ] ; then
+     clear
+     wget -c "https://github.com/frannks/wallpack/archive/refs/heads/main.zip"
+     unzip main.zip
+     mv wallpack-main/* ~/Wallpapers/
+     rm -rf main.zip wallpack-main
+     cd $HOME/Wallpapers && rm -rf LICENSE && cd $HOME && continue
+  
+  elif [ $SELECTION == '4' ] || [ $SELECTION == '04' ] ; then
+    clear && exit 0
+  fi
+  
+ done

@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+
+[ ! `command -v fzf` ] && echo "fzf não instalado, por favor faça a instalação" && exit 1
+[ ! `command -v reflector` ] && echo "reflector não instalado, por favor faça a instalação" && exit 1
+[ ! `command -v wget` ] && echo "wget não instalado, por favor faça a instalação" && exit 1
+
+# Root Checker
+if [ "$EUID" -ne 0 ]
+  then echo "Execute esse script como ROOT!"
+  exit
+fi
+
+# Mirrorlist download file
+FILE="$HOME/.mirrors-list"
+if [ ! -d "$FILE" ] ; then
+  wget -c "https://github.com/frannks/mydots/raw/main/.mirrors-list" && clear
+  sudo cp "$HOME/.mirrors-list /root"
+else
+  sudo cp "$HOME/.mirrors-list /root"
+  cd $HOME
+fi
+while true ; do
+  clear
+  printf "Mirrorlist-CLI\n\nEscolha uma das opções abaixo:\n\n[1] - Fazer backup mirrorlist\n[2] - Definir um novo mirrorlist\n[3] - Sair\n\n"
+  read ESCOLHA
+  if [ $ESCOLHA == '1' ] || [ $ESCOLHA == '01' ] ; then
+    clear
+    printf 'Fazendo backup em: /etc/pacman.d/mirrorlist.backup' && sleep 2
+    cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.backup
+    printf "\n\n" && read -p 'Backup finalizado, PRESSIONE ENTER PARA CONTINUAR...' && continue
+
+  elif [ $ESCOLHA == '2' ] || [ $ESCOLHA == '02' ] ; then
+    clear && read -p 'Para cancelar alguma execução, PRESSIONE ^C (CTRL+ C - Control + C) PRESSIONE ENTER PARA CONTINUAR...' && clear
+    IFS=$'\n'
+    mapfile -t array1 < <(cat  $HOME/.mirrors-list | \
+    fzf --query="$1" --multi --select-1 --exit-0)
+    [[ -n "${array1[@]}" ]]
+    read -p 'PRESSIONE ENTER PARA ESCOLHE OUTRO PAIS...' && clear
+
+    IFS=$'\n'
+    mapfile -t array2 < <(cat  $HOME/.mirrors-list | \
+    fzf --query="$1" --multi --select-1 --exit-0)
+    [[ -n "${array2[@]}" ]]
+
+    clear && sudo reflector --country "${array1[@]}" --country "${array2[@]}" --number 20 --age 6 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
+    sudo pacman -Syy && continue
+   
+  elif [ $ESCOLHA == '3' ] || [ $ESCOLHA == '03' ] ; then
+    clear && exit 0
+  fi
+done 

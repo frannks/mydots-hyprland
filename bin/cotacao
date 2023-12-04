@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+clear
+read -p "Digite a quantia do dólar: " dolar
+read -p "Digite a cotação atual: " cota
+real=$(echo "$dolar*$cota" | bc -l)
+echo "O valor em reais é: R$ $real"

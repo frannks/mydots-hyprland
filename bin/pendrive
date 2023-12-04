@@ -1,0 +1,73 @@
+#!/usr/bin/env bash
+
+# Franklin Souza
+# @FranklinTech
+
+# Root Checker
+if [ "$EUID" -ne 0 ]
+  then echo "Execute esse script como ROOT!"
+  exit
+fi
+
+while true; do
+  clear
+
+  # Devices
+  printf "Pendrive Mount\n\n"
+
+  # Opções
+  printf "O que você deseja fazer?:\n\n"
+  printf "[01] - Montar pendrive\n"
+  printf "[02] - Desmontar pendrive\n"
+  printf "[03] - Formatar\n"
+  printf "[04] - Listar pastas montadas\n"
+  printf "[05] - Listar Pendrive\n"
+  printf "[06] - Sair\n\n"
+  read OPC
+
+  # Condições
+  if [ $OPC == '1' ] || [ $OPC == '01' ] ; then
+    clear
+    cd /mnt
+    printf "Digite o nome da pasta para o seu pendrive (Evite espações e acentuações):\n\n"
+    read NAME_PENDRIVE
+    sudo mkdir $NAME_PENDRIVE
+    printf "\n\nOBS: Abaixo estão os dispositivos reconhecidos, (SELECIONE O SEU PENDRIVE):\n\n" && echo && lsblk | grep sdb
+    printf "\n\nDigite o tipo do pendrive:\n\n"
+    read PENDRIVE_TYPE
+    sudo mount /dev/$PENDRIVE_TYPE /mnt/$NAME_PENDRIVE
+
+  elif [ $OPC == '2' ] || [ $OPC == '02' ] ; then
+    clear
+    cd /mnt && ls
+    printf "\n\nDigite o nome da pasta (Pendrive) que você queira desmontar:\n\n"
+    read DEL_PASTE
+    sudo umount -Rf /mnt/$DEL_PASTE
+    sudo rm -rf /mnt/$DEL_PASTE
+
+  elif [ $OPC == '3' ] || [ $OPC == '03' ] ; then
+    clear
+    sudo fdisk -l
+    printf "\n\nDigite o pendrive aqui:\n\n"
+    read PENDRIVE_TYPE1
+    sudo mkfs.vfat -F 32 /dev/$PENDRIVE_TYPE1
+    clear && read -p 'Pendrive FORMATADO COM SUCESSO... PRESSIONE ENTER PARA CONTINUAR...' && continue
+    #sudo mkfs -t vfat /dev/$PENDRIVE_TYPE2
+
+  elif [ $OPC == '4' ] || [ $OPC == '04' ] ; then
+    clear
+    ls /mnt
+    read -p 'PRESS ENTER TO CONTINUE...' && continue
+
+  elif [ $OPC == '5' ] || [ $OPC == '05' ] ; then
+    clear
+    lsblk | grep sdb
+    echo && read -p 'PRESS ENTER TO CONTINUE...' && continue
+
+  elif [ $OPC == '6' ] || [ $OPC == '06' ] ; then
+    clear && exit 0
+  else
+    clear && read -p 'Opção inexistente...(PRESS ENTER TO CONTINUE...)'
+    continue
+  fi
+done
