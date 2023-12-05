@@ -3,24 +3,21 @@
     "position": "top",
     "margin-bottom": 0,
     "modules-left": [
-      "clock",
       "hyprland/workspaces",
-      "custom/updates",
-      "tray",
       ],
     "modules-center": [
-      "hyprland/window",
+      "clock",
       ],
     "modules-right": [
-      "network",
       "temperature",
       "memory",
       "cpu",
       "pulseaudio",
       "custom/powermenu",
+      "tray",
     ],
     "tray": {
-      "icon-size": 24,
+      "icon-size": 16,
       "spacing": 10
     },
     "hyprland/window": {
@@ -100,7 +97,7 @@
           "phone": " ",
           "portable": " ",
           "car": " ",
-          "default": [" ", " "]
+          "default": ["", " "]
       },
       "scroll-step": 1,
       "on-click": "pavucontrol"
