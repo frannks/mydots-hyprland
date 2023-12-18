@@ -1,90 +1,93 @@
 {
-  "layer": "top",
-    "position": "top",
-    "margin-bottom": 0,
-    "modules-left": [
-      "hyprland/workspaces",
-      ],
-    "modules-center": [
-      "clock",
-      ],
-    "modules-right": [
-      "temperature",
-      "memory",
-      "cpu",
-      "pulseaudio",
-      "custom/powermenu",
-      "tray",
-    ],
-    "tray": {
-      "icon-size": 16,
-      "spacing": 10
-    },
-    "hyprland/window": {
-      "format": " {}",
-      "rewrite": {
-          "(\\d\\. )?(.*) - Chromium": "<span color=\"#4285F4\"></span>  $2 ",
-          "nvim (.*)": "<span color=\"#57A143\"></span>  $1",
-          "nvim": "<span color=\"#57A143\">  Neovim</span> ",
-          "ranger(.*)": "<span color=\"#ffffff\"></span>  $1",
-          //"kitty (.*)": "<span color=\"#ffffff\"></span>  $1",
-          "Search(.*)": "<span color=\"#a855f7\"></span>  Search$1",
-      },
-      "separate-outputs": false
-    },
-    "hyprland/submap": {
-      "format": "✌️ {}",
-      "max-length": 8,
-      "tooltip": true
-    },
-    "hyprland/workspaces": {
+    "layer": "bottom", // Waybar at top layer
+    "position": "top", // Waybar position (top|bottom|left|right)
+    "height": 30, // Waybar height (to be removed for auto height)
+    "spacing": 4, // Gaps between modules (4px)
+    "modules-left": ["hyprland/workspaces",],
+    "modules-center": ["clock"],
+    "modules-right": ["pulseaudio", "cpu", "memory", "temperature", 
+                      "custom/colorpicker", "tray", "custom/powermenu"],
+   "hyprland/workspaces": {
       "format": "{icon}",
       "format-icons": {
-        "1": " ",
-        "2": " ",
-        "3": " ",
-        "4": " ",
-        "5": " ",
-        "6": " ",
-        "7": "",
-        "8": "",
-        "9": " ",
-        "10": " ",
+        "1": "1",
+        "2": "2",
+        "3": "3",
+        "4": "4",
+        "5": "5",
+        "6": "6",
+        "7": "7",
+        "8": "8",
+        "9": "9",
+        "10": "10",
         "-99": " ",
-        "active": "",
-        "default": ""
+        "active": " ",
+        "default": " "
       }
     },
-    "network": {
-      "interface": "enp3s0",
-      "tooltip-format-ethernet": "{ifname} ",
-      "interval": 2,
-      "format": " {bandwidthDownBits}  {bandwidthUpBits}",
+    "tray": {
+        // "icon-size": 21,
+        "spacing": 10
     },
-    "temperature": {
-      "format": "{icon} {temperatureC}°C",
-      "hwmon-path": "/sys/class/hwmon/hwmon0/temp1_input",
-      "critical-threshold": 80,
-      "format-icons": ["", "", ""]
+    "clock": {
+        "tooltip-format": "<tt>{calendar}</tt>",
+        "format-alt": "  {:%a, %d %b %Y}",
+        "format": "  {:%I:%M %p}",
+    	"timezone" : ""
+	},
+    "cpu": {
+        "format": "{usage}% ",
+        "tooltip": false
     },
     "memory": {
-      "format": " {}%",
-      "tooltip": true,
+        "format": "{}% "
     },
-    "cpu": {
-      "format": " {usage}%",
-      "tooltip": true,
+    
+    "temperature": {
+        // "thermal-zone": 2,
+        // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+        "critical-threshold": 80,
+        // "format-critical": "{temperatureC}°C {icon}",
+        "format": "{temperatureC}°C {icon}",
+        "format-icons": ["", "", ""]
     },
+    "backlight": {
+        // "device": "acpi_video1",
+        "format": "{percent}% {icon}",
+        "format-icons": [""]
+    },
+    "battery": {
+        "states": {
+            // "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{capacity}% {icon}",
+        "format-charging": "{capacity}% ",
+        "format-plugged": "{capacity}% ",
+        "format-alt": "{time} {icon}",
+        // "format-good": "", // An empty format will hide the module
+        // "format-full": "",
+        "format-icons": ["", "", "", "", ""]
+    },
+    "network": {
+        "format-wifi": "{essid} ({signalStrength}%) ",
+        "format-ethernet": "{ipaddr}/{cidr} ",
+        "tooltip-format": "{ifname} via {gwaddr} ",
+        "format-linked": "{ifname} (No IP) ",
+        "format-disconnected": "Disconnected ⚠",
+        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+        },
+
     "custom/powermenu": {
-      "format": "  ",
-      "tooltip": false,
-      "on-click": "exec wlogout -p layer-shell",
+    "format": "  ",
+    "tooltip": false,
+    "on-click": "exec wlogout -p layer-shell",
     },
-    "custom/updates": {
-      "format": "<span color=\"#61afef\">  </span> {}",
-      "tooltip": false,
-      "interval": 60,
-      "exec": "exec $HOME/.config/waybar/checkupdate.sh"
+    "custom/colorpicker": {
+        "format": "",
+        "tooltip": false,
+        "on-click": "exec hyprpicker -ar",
     },
     "pulseaudio": {
       "format": "{volume}% {icon}",
@@ -97,16 +100,10 @@
           "phone": " ",
           "portable": " ",
           "car": " ",
-          "default": ["", " "]
+          "default": ["", ""]
       },
       "scroll-step": 1,
       "on-click": "pavucontrol"
     },
-    "clock": {
-      //"format": "<span color=\"#56b6c2\"></span> {:%H:%M}",
-      "format": "{:%d/%m/%Y - %H:%M}",
-      "interval": 60,
-      "tooltip": false,
-      "tooltip-format": "{:%d %B %H:%M}"
-    }
 }
+
