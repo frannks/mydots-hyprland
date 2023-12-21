@@ -1,3 +1,4 @@
+
 {
     "layer": "bottom", // Waybar at top layer
     "position": "top", // Waybar position (top|bottom|left|right)
@@ -30,7 +31,6 @@
         "spacing": 10
     },
     "clock": {
-        "tooltip-format": "<tt>{calendar}</tt>",
         "format-alt": "  {:%a, %d %b %Y}",
         "format": "  {:%I:%M %p}",
     	"timezone" : ""
