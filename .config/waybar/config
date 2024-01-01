@@ -32,7 +32,8 @@
     "clock": {
         "format-alt": "  {:%a, %d %b %Y}",
         "format": "  {:%I:%M %p}",
-    	"timezone" : ""
+        "interval" : "60",
+    	  "timezone" : ""
 	},
     "cpu": {
         "format": "{usage}% ",
