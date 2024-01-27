@@ -21,12 +21,12 @@
         "9": "9",
         "10": "10",
         "-99": " ",
-        "active": " ",
-        "default": " "
+        "active": "",
+        "default": ""
       }
     },
     "tray": {
-        // "icon-size": 21,
+        "icon-size": 21,
         "spacing": 10
     },
     "clock": {
