@@ -1,3 +1,3 @@
 # Hyprland WM
 
-<img src="HyprPrint.png">
+<img src="HyprlandWM.png">
