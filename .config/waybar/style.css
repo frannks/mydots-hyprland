@@ -66,6 +66,7 @@ window#waybar.chromium {
 }
 
 #clock,
+#custom-checkupdates,
 #custom-colorpicker,
 #battery,
 #cpu,
@@ -105,6 +106,10 @@ window#waybar.chromium {
 }
 
 #clock {
+    min-width: 45px;
+}
+
+#custom-checkupdates {
     min-width: 45px;
 }
 
