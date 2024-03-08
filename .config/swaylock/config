@@ -9,9 +9,9 @@ font="FiraCode"
 indicator
 indicator-radius=200
 indicator-thickness=20
-line-color=#484441
-ring-color=#8FAAB1
-inside-color=#3F3B38
+line-color=#FBB95B
+ring-color=#182838
+inside-color=#1C4771
 key-hl-color=ffffff
 separator-color=00000000
 text-color=#F0F0F0
