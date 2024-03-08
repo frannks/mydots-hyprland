@@ -3,6 +3,8 @@
 # Franklin Souza
 # @FranklinTech
 
+SOUND=/usr/share/sounds/freedesktop/stereo/complete.oga
+
 # Diretório para salvar os prints
 screenshot_dir="$HOME/Pictures/Screenshots"
 
@@ -17,13 +19,13 @@ show_notification() {
 # Função para tirar print de toda a tela e salvar
 take_full_screen() {
     grim "$screenshot_dir/screenshot-$(date +%Y%m%d%H%M%S).png"
-    show_notification "Print de tela salvo em $screenshot_dir"
+    show_notification "Print de tela salvo em $screenshot_dir" && mpv $SOUND
 }
 
 # Função para tirar print de toda a tela, copiar para o clipboard e salvar
 take_full_screen_to_clipboard() {
     grim - | wl-copy
-    #take_full_screen
+    show_notification "Print de tela no clipboard" && mpv $SOUND
 }
 
 # Função para recortar print e salvar
@@ -31,7 +33,7 @@ crop_screen() {
     # Usando slurp para selecionar uma região da tela
     geometry=$(slurp)
     grim -g "$geometry" "$screenshot_dir/cropped-$(date +%Y%m%d%H%M%S).png"
-    show_notification "Recorte de tela salvo em $screenshot_dir"
+    show_notification "Recorte de tela salvo em $screenshot_dir" && mpv $SOUND
 }
 
 # Função para recortar print, copiar para o clipboard e salvar
@@ -39,7 +41,7 @@ crop_screen_to_clipboard() {
     # Usando slurp para selecionar uma região da tela
     geometry=$(slurp)
     grim -g "$geometry" - | wl-copy
-    #crop_screen
+    show_notification "Recorte de tela no clipboard" && mpv $SOUND
 }
 
 # Opções do menu
@@ -48,8 +50,8 @@ options=("Tirar print de toda a tela\n""Tirar print de toda a tela para o clipbo
 # Usando rofi para exibir o menu
 selected_option=$(echo -e "${options[@]}" | rofi -dmenu -i -p "Escolha uma opção")
 
-# Aguarda 5 segundos
-sleep 2
+# Aguarde 1 segundo
+sleep 1
 
 # Executando a ação correspondente à opção selecionada
 case "$selected_option" in
