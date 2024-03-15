@@ -5,7 +5,7 @@
     "spacing": 4, // Gaps between modules (4px)
     "modules-left": ["hyprland/workspaces",],
     "modules-center": ["clock"],
-    "modules-right": ["custom/check_updates", "pulseaudio", "cpu", "memory", "temperature", 
+    "modules-right": ["custom/check_updates", "pulseaudio", "custom/packages", "cpu", "memory", "temperature", 
                       "custom/colorpicker", "tray", "custom/powermenu"],
    "hyprland/workspaces": {
       "format": "{icon}",
