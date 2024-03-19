@@ -55,16 +55,16 @@ sleep 1
 
 # Executando a ação correspondente à opção selecionada
 case "$selected_option" in
-    "Tirar print de toda a tela")
+    "Tirar print da tela toda")
         take_full_screen
         ;;
-    "Tirar print de toda a tela para o clipboard")
+    "Tirar print da tela toda (clipboard)")
         take_full_screen_to_clipboard
         ;;
     "Recortar print")
         crop_screen
         ;;
-    "Recortar print para o clipboard")
+    "Recortar print (clipboard)")
         crop_screen_to_clipboard
         ;;
     *)
