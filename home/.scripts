@@ -77,6 +77,11 @@ for i in "$@"; do
 done
 }
 
+# YouTube Mp3 Download
+mp3down(){
+	yt-dlp --extract-audio --audio-format mp3 "$@"
+}
+
 # you can put as many files do you want
 0x0() {
 for i in "$@"; do
