@@ -45,10 +45,10 @@ crop_screen_to_clipboard() {
 }
 
 # Opções do menu
-options=("Tirar print da tela toda\n""Tirar print da tela (clipboard)\n""Recortar print\n""Recortar print (clipboard)\n")
+options=("Tirar print da tela toda\n""Tirar print da tela toda (clipboard)\n""Recortar print\n""Recortar print (clipboard)\n")
 
-# Usando rofi para exibir o menu
-selected_option=$(echo -e "${options[@]}" | rofi -dmenu -i -p "Escolha uma opção")
+# Usando wofi para exibir o menu
+selected_option=$(echo -e "${options[@]}" | wofi -dmenu -i -p "Escolha uma opção")
 
 # Aguarde 1 segundo
 sleep 1
@@ -71,3 +71,4 @@ case "$selected_option" in
         echo "Opção inválida"
         ;;
 esac
+
