@@ -1,0 +1,12 @@
+
+# General settings.
+mode=drun
+insensitive=true
+location=2
+y=100
+
+# Appearance.
+prompt=
+height=50%
+width=50%
+
