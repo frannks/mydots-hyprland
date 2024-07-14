@@ -1,0 +1,30 @@
+#!/bin/bash
+
+function countdown_NewYear() {
+  current_time=$(date +%s)
+  end_of_year=$(date -d "December 31 23:59:59" +%s)
+  countdown_time=$((end_of_year - current_time))
+
+  days=$(($countdown_time / 86400))
+  hours=$((($countdown_time % 86400) / 3600))
+  minutes=$((($countdown_time % 3600) / 60))
+  seconds=$(($countdown_time % 60))
+
+  printf "%s\n" "  ${days}d ${hours}h ${minutes}m ${seconds}s"
+}
+
+if [ $(date +%m/%d) == "12/31" ] ; then
+  countdown_NewYear
+  printf "%s\n" " Countdown to the New Year!"
+else
+  current_time=$(date +%s)
+  end_of_year=$(date -d "December 31 23:59:59" +%s)
+  countdown_time=$((end_of_year - current_time))
+
+  days=$(($countdown_time / 86400))
+  hours=$((($countdown_time % 86400) / 3600))
+  minutes=$((($countdown_time % 3600) / 60))
+  seconds=$(($countdown_time % 60))
+
+  printf "%s\n" "  ${days}d ${hours}h ${minutes}m ${seconds}s to end $(date +%Y)"
+fi
