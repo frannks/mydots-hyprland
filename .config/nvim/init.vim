@@ -69,8 +69,16 @@ Plug 'karb94/neoscroll.nvim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npx --yes yarn install' }
 
+"Themes
+Plug 'morhetz/gruvbox'
+Plug 'navarasu/onedark.nvim'
+
 call plug#end()
- 
+
+"Color
+"color onedark
+"color gruvbox
+
 "Cursor
 set cursorline
 highlight clear CursorLine
@@ -102,6 +110,7 @@ set inccommand=split
 set guifont=Fira\ Code:9.5
 set clipboard=unnamedplus
 set incsearch ignorecase smartcase hlsearch
+set bg=dark
 
 "Leader Key
 let mapleader="\<space>"
@@ -195,6 +204,7 @@ nmap <C-p> <Plug>MarkdownPreviewToggle
 "<C-g>u breaks current undo, please make your own choice.
 inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
 
 
 "Lualine
