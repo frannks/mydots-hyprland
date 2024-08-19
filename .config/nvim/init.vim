@@ -53,6 +53,7 @@ Plug 'thinca/vim-quickrun'
 
 "Fzf
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 
 "Indent Blank
 Plug 'lukas-reineke/indent-blankline.nvim'
@@ -69,15 +70,33 @@ Plug 'karb94/neoscroll.nvim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npx --yes yarn install' }
 
+"HTML
+Plug 'mattn/emmet-vim'
+
 "Themes
 Plug 'morhetz/gruvbox'
 Plug 'navarasu/onedark.nvim'
+Plug 'tanvirtin/monokai.nvim'
+Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
+Plug 'bluz71/vim-moonfly-colors', { 'as': 'moonfly' }
+Plug 'AlexvZyl/nordic.nvim', { 'branch': 'main' }
+Plug 'xero/miasma.nvim'
+Plug 'comfysage/evergarden'
+Plug 'shrikecode/kyotonight.vim'
 
 call plug#end()
 
 "Color
+"--------
 "color onedark
 "color gruvbox
+"color nordic
+"color monokai
+"color catppuccin
+color moonfly
+"color miasma
+"color evergarden
+"color kyotonight
 
 "Cursor
 set cursorline
@@ -94,7 +113,7 @@ set confirm
 "set tabstop=4
 set title
 set mouse=a
-"set relativenumber
+set relativenumber
 "syntax on
 filetype on
 "set termguicolors
