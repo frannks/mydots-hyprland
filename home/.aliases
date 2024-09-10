@@ -1,8 +1,8 @@
 # My aliases
 
-alias asp="arch_snapshot"
-alias add='sudo snap-pac'
-alias up='sudo arch_update_snapshot '
+alias asp="$HOME/.local/bin/arch_snapshot"
+alias add='sudo $HOME/.local/bin/snap-pac'
+alias up='sudo $HOME/.local/bin/arch_update_snapshot '
 alias pkg='pacman -Ss'
 alias pkg1='pacseek'
 alias del='sudo pacman -Rns'
@@ -80,7 +80,7 @@ alias off="sudo systemctl disable"
 alias st="clear && speedtest"
 alias rom="$HOME/Scripts/StockROM.sh"
 alias cpum='watch -n1 "cat /proc/cpuinfo | grep \"^[c]pu MHz\""'
-alias rs="sudo remove_snapshot"
+alias rs="sudo $HOME/.local/bin/remove_snapshot"
 alias sysf="~/Scripts/sysfetch.sh"
 alias pyroot="sudo cp -r $HOME/.cache/wal /root/.cache"
 alias check="sha256sum"
@@ -120,3 +120,4 @@ alias tam='du -h'
 alias f='free -h'
 alias s='$HOME/Scripts/sysfetch'
 alias way='sudo $HOME/Scripts/waydroid.sh'
+alias sht='$HOME/Scripts/short.sh'
