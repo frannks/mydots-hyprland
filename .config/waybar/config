@@ -127,9 +127,8 @@
     "exec": "/usr/bin/python3 /home/frank/.config/waybar/scripts/mediaplayer.py --player spotify",
     "format": "{}   ",
     "return-type": "json",
-    "on-click": "playerctl play-pause",
+    "on-click": "playerctl --player=spotify play-pause",
     "on-scroll-up": "playerctl next",
-    "on-scroll-down": "playerctl previous"    
+    "on-scroll-down": "playerctl previous"
     },
 }
-
