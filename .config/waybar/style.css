@@ -73,6 +73,7 @@ window#waybar.chromium {
 #custom-checkupdates,
 #custom-colorpicker,
 #custom-mic_status,
+#custom-spotify,
 #battery,
 #cpu,
 #memory,
@@ -187,6 +188,10 @@ label:focus {
 
 #custom-media.custom-vlc {
     background-color: #ffa000;
+}
+
+#custom-spotify {
+    background-color: #1DB954;
 }
 
 #temperature {

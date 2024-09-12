@@ -4,9 +4,9 @@
     "height": 30, // Waybar height (to be removed for auto height)
     "spacing": 4, // Gaps between modules (4px)
     "modules-left": ["hyprland/workspaces",],
-    "modules-center": ["clock"],
+    "modules-center": ["custom/spotify"],
     "modules-right": ["custom/check_updates", "pulseaudio", "custom/packages", "cpu", "memory", "temperature", 
-                      "custom/colorpicker", "custom/mic_status", "tray", "custom/powermenu"],
+                      "custom/colorpicker", "custom/mic_status", "clock", "tray", "custom/powermenu"],
    "hyprland/workspaces": {
       "format": "{icon}",
       "format-icons": {
@@ -115,11 +115,21 @@
   "custom/mic_status": {
     "exec": "cat /tmp/mic_status",
     "interval": 1,
+    "on-click": "$HOME/.config/hypr/scripts/toggle_mic.sh",
     "format": "{}",
     "format-icons": {
-      "on": " Microfone Ativado",  // Escolha o ícone que preferir
-      "off": " Microfone Mutado"    // Escolha o ícone que preferir
+      "on": " Microfone Ativado",
+      "off": " Microfone Mutado"
     },
   },
+
+  "custom/spotify": {
+    "exec": "/usr/bin/python3 /home/frank/.config/waybar/scripts/mediaplayer.py --player spotify",
+    "format": "{}   ",
+    "return-type": "json",
+    "on-click": "playerctl play-pause",
+    "on-scroll-up": "playerctl next",
+    "on-scroll-down": "playerctl previous"    
+    },
 }
 
