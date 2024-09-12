@@ -21,6 +21,6 @@ fi
 if (( $total_updates > 0 )); then
   echo " $total_updates atualizações disponíveis!!!"; exit 0
 else
-  echo " O sistema está atualizado!!!"; exit 0
+  echo " O seu arch está atualizado!!!"; exit 0
 fi
 

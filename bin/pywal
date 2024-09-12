@@ -5,19 +5,42 @@
 
 clear
 
-# Packages
+# Verifica se os pacotes necessários estão instalados
 [ ! `command -v wget` ] && echo "wget não instalado, por favor faça a instalação!!!" && exit 1
 [ ! `command -v fzf` ] && echo "fzf não instalado, por favor faça a instalação!!!" && exit 1
 [ ! `command -v unzip` ] && echo "unzip não instalado, por favor faça a instalação!!!" && exit 1
+[ ! `command -v hyprctl` ] && echo "hyprctl não instalado, por favor faça a instalação!!!" && exit 1
 
+# Função para atualizar o hyprpaper.conf
+update_hyprpaper() {
+    WALLPAPER_PATH="$1"
+    CONFIG_FILE="$HOME/.config/hypr/hyprpaper.conf"
+    
+    # Verifica se o arquivo de configuração existe
+    if [[ -f "$CONFIG_FILE" ]]; then
+        # Atualiza a linha que contém o preload e o wallpaper
+        sed -i "s|preload = .*|preload = $WALLPAPER_PATH|g" "$CONFIG_FILE"
+        sed -i "s|wallpaper = .*|wallpaper = HDMI-A-1,$WALLPAPER_PATH|g" "$CONFIG_FILE"
+        
+        # Recarrega a configuração do Hyprland
+        hyprctl reload
+        echo "Wallpaper e preload atualizados no Hyprpaper!"
+    else
+        echo "Arquivo hyprpaper.conf não encontrado!"
+    fi
+}
+
+# Loop do menu
 while true ; do
 
-  # Variaveis view image
+  # Variáveis para visualizar imagens
   IMG1="catimg -r2 -w$COLUMNS"
   IMG2="sxiv -g 512x512"
   
-  mkdir $HOME/Wallpapers
+  # Cria o diretório de wallpapers, se não existir
+  mkdir -p $HOME/Wallpapers
   DIR="$HOME/Wallpapers"
+  
   clear
   printf "
  ██████╗ ██╗   ██╗██╗    ██╗ █████╗ ██╗     
@@ -28,38 +51,49 @@ while true ; do
  ╚═╝        ╚═╝    ╚══╝╚══╝ ╚═╝  ╚═╝╚══════╝
                                            \n\n"
 
-  printf "Wallpaper definido: " && sed -n 3p ~/.cache/wal/colors.sh
+  printf "Wallpaper atual: " && sed -n 3p ~/.cache/wal/colors.sh
   printf "\n\nEscolha uma das opções abaixo:\n\n"
-  printf "[1] - Wallpaper random (Pywal)\n"
+  printf "[1] - Wallpaper aleatório (Pywal)\n"
   printf "[2] - Definir Wallpaper (Pywal)\n"
   printf "[3] - Baixar WallPack\n"
   printf "[4] - Sair\n\n"
-  read SELECTION
+  read -p "Digite sua escolha: " SELECTION
 
-  if [ $SELECTION == '1' ] || [ $SELECTION == '01' ] ; then
-
-     clear
+  if [ "$SELECTION" == '1' ] || [ "$SELECTION" == '01' ] ; then
+    clear
     my_array=($HOME/Wallpapers/*)
-    wal -i ${my_array[$(( $RANDOM % ${#my_array[@]}))]} && $HOME/.config/dunst/./launchdunst.sh && wal-telegram --wal && cat /home/frank/.cache/wal/colors-kitty.conf > ~/.config/kitty/theme.conf  && cat /home/frank/.cache/wal/colors-rofi-dark.rasi > ~/.config/rofi/config.rasi
+    RANDOM_WALLPAPER="${my_array[$(( $RANDOM % ${#my_array[@]}))]}"
+    wal -i "$RANDOM_WALLPAPER" && $HOME/.config/dunst/./launchdunst.sh && wal-telegram --wal && \
+    cat /home/frank/.cache/wal/colors-kitty.conf > ~/.config/kitty/theme.conf && \
+    cat /home/frank/.cache/wal/colors-rofi-dark.rasi > ~/.config/rofi/config.rasi
+    
+    update_hyprpaper "$RANDOM_WALLPAPER"
     read -p 'PRESS ENTER TO CONTINUE...' && continue
 
-  elif [ $SELECTION == '2' ] || [ $SELECTION == '02' ] ; then
+  elif [ "$SELECTION" == '2' ] || [ "$SELECTION" == '02' ] ; then
     IFS=$'\n'
     mapfile -t array < <(find  ~/Wallpapers -regextype posix-egrep -regex '.*\.(jpg|png)' | \
     fzf --preview="if [[ {} =~ ('.jpg'|'.JPG'|'.jpeg'|'.png'|'.PNG')$ ]]; then "$IMG1" {}; elif [ -d {} ]; then ls --color=always --group-directories-first -H {}; else nl -pba -w1 -s' ' {};fi" --query="$1" --multi --select-1 --exit-0)
-    [[ -n "${array[@]}" ]] && wal -i "${array[@]}" && $HOME/.config/dunst/./launchdunst.sh && wal-telegram --wal && cat /home/frank/.cache/wal/colors-kitty.conf > ~/.config/kitty/theme.conf && cat /home/frank/.cache/wal/colors-rofi-dark.rasi > ~/.config/rofi/config.rasi
+    
+    if [[ -n "${array[@]}" ]]; then
+      wal -i "${array[@]}" && $HOME/.config/dunst/./launchdunst.sh && wal-telegram --wal && \
+      cat /home/frank/.cache/wal/colors-kitty.conf > ~/.config/kitty/theme.conf && \
+      #cat /home/frank/.cache/wal/colors-rofi-dark.rasi > ~/.config/rofi/config.rasi
+      
+      update_hyprpaper "${array[@]}"
+    fi
     read -p 'PRESS ENTER TO CONTINUE...' && continue
 
-  elif [ $SELECTION == '3' ] || [ $SELECTION == '03' ] ; then
-     clear
-     wget -c "https://github.com/frannks/wallpack/archive/refs/heads/main.zip"
-     unzip main.zip
-     mv wallpack-main/* ~/Wallpapers/
-     rm -rf main.zip wallpack-main
-     cd $HOME/Wallpapers && rm -rf LICENSE && cd $HOME && continue
+  elif [ "$SELECTION" == '3' ] || [ "$SELECTION" == '03' ] ; then
+    clear
+    wget -c "https://github.com/frannks/wallpack/archive/refs/heads/main.zip"
+    unzip main.zip
+    mv wallpack-main/* ~/Wallpapers/
+    rm -rf main.zip wallpack-main
+    cd $HOME/Wallpapers && rm -rf LICENSE && cd $HOME && continue
   
-  elif [ $SELECTION == '4' ] || [ $SELECTION == '04' ] ; then
+  elif [ "$SELECTION" == '4' ] || [ "$SELECTION" == '04' ] ; then
     clear && exit 0
   fi
   
- done
+done

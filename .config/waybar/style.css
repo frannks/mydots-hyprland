@@ -1,12 +1,14 @@
 * {
-    /* `otf-font-awesome` is required to be installed for icons */
-    font-family: "Roboto Mono Medium", Roboto, Helvetica, Arial, sans-serif;
-    font-size: 13px;
+    
+    /* Fonts: Iosevka, Roboto, Roboto Mono Medium, SourceCodeVF, Fira Code, Arial, Fantasque Sans Mono*/
+
+    font-family: "Roboto Mono Medium";
+    font-size: 12px;
 }
 
 window#waybar {
     /*background-color: rgba(125, 123, 137, 0.7);*/
-    background-color: #141414;
+    background-color: #282828;
     opacity: 1.0;
     color: #ffffff;
     transition-property: background-color;
@@ -70,6 +72,7 @@ window#waybar.chromium {
 #clock,
 #custom-checkupdates,
 #custom-colorpicker,
+#custom-mic_status,
 #battery,
 #cpu,
 #memory,
@@ -89,7 +92,7 @@ window#waybar.chromium {
     margin: 3px 0px;
     color: #ffffff;
     border-radius: 40;
-    background-color: #009CFF;
+    background-color: #076678;
 
 }
 
@@ -146,6 +149,10 @@ label:focus {
 }
 
 #custom-colorpicker {
+    min-width: 10px;
+}
+
+#custom-mic_status {
     min-width: 10px;
 }
 

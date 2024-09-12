@@ -1,6 +1,9 @@
+/* Supondo que você tem um arquivo colors.css gerado pelo pywal */
+@import url("~/.cache/wal/colors.css");
+
 window {
-    background-color: #1C2021;
-    border: 0.2rem solid #D5C4A5;
+    background-color: var(--color0); /* Use a cor de fundo */
+    border: 0.2rem solid var(--color4); /* Use a cor da borda */
     border-radius: 0.5rem;
     font-family: "Bahamas";
     font-size: 1rem;
@@ -13,10 +16,10 @@ window:focus {
 }
 
 .search {
-    background-color: #31302E;
-    border: 0.1rem solid #31302E;
+    background-color: var(--color8); /* Use a cor de fundo da busca */
+    border: 0.1rem solid var(--color1); /* Use a cor da borda da busca */
     box-shadow: none;
-    color: #FFFFFF;
+    color: var(--color7); /* Use a cor do texto da busca */
     margin: 0 0 1.5rem 0;
     padding: 0.75rem 0;
 }
@@ -35,16 +38,16 @@ window:focus {
 
 #entry {
     border: 0.1rem solid transparent;
-    color: #F4E9CF;
+    color: var(--color6); /* Use a cor do texto do entry */
     margin: 0;
     padding: 0.5rem 0.75rem;
     transition: 0.1s ease;
 }
 
 #entry:selected {
-    background-color: #ed5d52;
-    border-color: 0.1rem solid #b8b8b8;
-    color: #e8e8e8;
+    background-color: var(--color2); /* Use a cor de fundo selecionada */
+    border-color: var(--color3); /* Use a cor da borda selecionada */
+    color: var(--color5); /* Use a cor do texto selecionado */
 }
 
 #entry .drun-icon {
