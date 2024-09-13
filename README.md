@@ -1,3 +1,3 @@
 # Hyprland WM
 
-<img src="ArchLinuxHyprland.png">
+<img src="Hyprland.png">
