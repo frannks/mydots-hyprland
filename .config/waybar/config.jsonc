@@ -1,3 +1,10 @@
+// ██╗    ██╗ █████╗ ██╗   ██╗██████╗  █████╗ ██████╗ 
+// ██║    ██║██╔══██╗╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗
+// ██║ █╗ ██║███████║ ╚████╔╝ ██████╔╝███████║██████╔╝
+// ██║███╗██║██╔══██║  ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗
+// ╚███╔███╔╝██║  ██║   ██║   ██████╔╝██║  ██║██║  ██║
+//  ╚══╝╚══╝ ╚═╝  ╚═╝   ╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
+
 {
     "layer": "bottom",
     "position": "top",
@@ -8,10 +15,11 @@
     "margin-left": 40,
     "margin-right": 40,
     "margin-bottom": 0,
-    "modules-left": ["hyprland/workspaces",],
-    "modules-center": ["custom/spotify"],
-    "modules-right": ["custom/check_updates", "pulseaudio", "custom/packages", "cpu", "memory", "temperature", 
-                      "custom/colorpicker", "custom/mic_status", "clock", "tray", "custom/powermenu"],
+    "modules-left": ["hyprland/workspaces", "custom/spotify"],
+    "modules-center": ["cpu", "memory", "temperature"],
+    "modules-right": ["custom/check_updates", "pulseaudio", "custom/colorpicker", "custom/mic_status", "custom/recorder", "clock", "tray", "custom/powermenu"],
+
+
    "hyprland/workspaces": {
       "format": "{icon}",
       "format-icons": {
@@ -35,10 +43,23 @@
         "spacing": 10
     },
     "clock": {
-        "format-alt": "  {:%a, %d %b %Y}",
+    	  "timezone" : "America/Sao_Paulo",
         "format": "  {:%I:%M %p}",
+        "format-alt": "  {:%a, %d %b %Y}",
         "interval" : "60",
-    	  "timezone" : ""
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
+     "calendar": {
+        "mode" : "year", // year(ano), month(mes)
+        "mode-mon-col" : 3,
+        "weeks-pos" : "none",
+        "format" : {
+            "months": "<span color='#ffffff'><b>{}</b></span>",
+            "days": "<span color='#ffffff'><b>{}</b></span>",
+            "weeks": "<span color='#EC3C3C'>W{}</span>",
+            "weekdays": "<span color='#EC3C3C'>{}</span>",
+            "today": "<span color='#EC3C3C'><b><u>{}</u></b></span>"
+        },
+    },
 	},
     "cpu": {
         "format": "{usage}% ",
@@ -49,12 +70,13 @@
     },
     
     "temperature": {
-        // "thermal-zone": 2,
-        // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
-        "critical-threshold": 80,
-        // "format-critical": "{temperatureC}°C {icon}",
-        "format": "{temperatureC}°C {icon}",
-        "format-icons": ["", "", ""]
+    "interval": 2,
+    "thermal-zone": 2,
+     "hwmon-path": "/sys/class/hwmon/hwmon1/temp1_input",
+     "critical-threshold": 80,
+     "format-critical": "{temperatureC}°C {icon}",
+     "format": "{temperatureC}°C {icon}",
+     "format-icons": ["", "", ""]
     },
     "backlight": {
         // "device": "acpi_video1",
@@ -87,7 +109,7 @@
     "custom/powermenu": {
     "format": "  ",
     "tooltip": false,
-    "on-click": "exec wlogout -p layer-shell",
+    "on-click": "exec /home/frank/.config/waybar/scripts/./powermenu.sh",
     },
     "custom/colorpicker": {
         "format": "",
@@ -135,5 +157,14 @@
     "on-click": "playerctl --player=spotify play-pause",
     "on-scroll-up": "playerctl next",
     "on-scroll-down": "playerctl previous"    
+    },
+
+    "custom/recorder": {
+    "format": "{}",
+    "exec": "pgrep -x wf-recorder > /dev/null && echo '  Gravando' || echo ''",
+    "interval": 2,
+    "on-click": "/home/frank/.config/waybar/scripts/wfrecord.sh",
+    "on-click-right": "pgrep -x wf-recorder > /dev/null && (killall wf-recorder && notify-send 'Wf-Recorder' 'Gravação finalizada')",
+    "signal": 8
     },
 }
