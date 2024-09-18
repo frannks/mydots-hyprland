@@ -1,3 +1,3 @@
 # Hyprland WM
 
-<img src="Hyprland-arch.png">
+<img src="arch.png">
