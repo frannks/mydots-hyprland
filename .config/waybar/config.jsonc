@@ -4,6 +4,7 @@
 // ██║███╗██║██╔══██║  ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗
 // ╚███╔███╔╝██║  ██║   ██║   ██████╔╝██║  ██║██║  ██║
 //  ╚══╝╚══╝ ╚═╝  ╚═╝   ╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
+                                                   
 
 {
     "layer": "bottom",
@@ -15,7 +16,7 @@
     "margin-left": 40,
     "margin-right": 40,
     "margin-bottom": 0,
-    "modules-left": ["hyprland/workspaces", "custom/spotify"],
+    "modules-left": ["hyprland/workspaces", "custom/spotify", "hyprland/window"],
     "modules-center": ["cpu", "memory", "temperature"],
     "modules-right": ["custom/check_updates", "pulseaudio", "custom/colorpicker", "custom/mic_status", "custom/recorder", "clock", "tray", "custom/powermenu"],
 
@@ -161,10 +162,20 @@
 
     "custom/recorder": {
     "format": "{}",
-    "exec": "pgrep -x wf-recorder > /dev/null && echo '  Gravando' || echo ''",
+    //"exec": "pgrep -x wf-recorder > /dev/null && echo '  Gravando...' || echo ''",
+    "exec": "pgrep -x wf-recorder > /dev/null && echo '<span color=\"#F53C3C\"> Gravando...</span>' || echo ''",
     "interval": 2,
     "on-click": "/home/frank/.config/waybar/scripts/wfrecord.sh",
     "on-click-right": "pgrep -x wf-recorder > /dev/null && (killall wf-recorder && notify-send 'Wf-Recorder' 'Gravação finalizada')",
-    "signal": 8
+    "signal": 8,
     },
+
+  "hyprland/window": {
+	"format": "{}",
+	"rewrite": {
+                "(.*) - Chromium": "Chromium",
+		"(.*) - zsh": "> [$1]"
+	},
+},
+
 }
