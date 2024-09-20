@@ -1,3 +1,12 @@
+" ███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗
+" ████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║
+" ██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║
+" ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║
+" ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║
+" ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝
+
+" =============================================================================
+
 "Vim-Plug
 "https://github.com/junegunn/vim-plug#neovim
 
@@ -180,8 +189,8 @@ xmap <C-/>   <Plug>NERDCommenterToggle<CR>
 
 "Map
 map q :q<CR>
-map y :ColorizerToggle<CR>
 map <C-q> :q!<CR>
+map <C-y> :ColorizerToggle<CR>
 map <C-s> :w!<CR>
 map t :Tutor<CR>
 map r :PlugInstall<CR>
@@ -242,5 +251,5 @@ require('lualine').setup{
   icons_enable = true,
   section_separators = { left = '', right = '' },
   component_separators = { left = '', right = '' }
-},
+}
 }
