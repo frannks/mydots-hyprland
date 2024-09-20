@@ -1,6 +1,6 @@
 window {
     font-family: "DejaVu Sans", "Font Awesome 5 Free";
-    background-color: var(--color0); /* Use a cor de fundo */
+    background-color: transparent; /* Use a cor de fundo */
     border: 0.2rem solid var(--color4); /* Use a cor da borda */
     border-radius: 0.5rem;
     font-size: 1rem;
