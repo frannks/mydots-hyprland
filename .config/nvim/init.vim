@@ -73,6 +73,9 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npx --yes yarn install' 
 "HTML
 Plug 'mattn/emmet-vim'
 
+"Colorizer
+Plug 'norcalli/nvim-colorizer.lua'
+
 "Themes
 Plug 'morhetz/gruvbox'
 Plug 'navarasu/onedark.nvim'
@@ -89,11 +92,11 @@ call plug#end()
 "Color
 "--------
 "color onedark
-"color gruvbox
+color gruvbox
 "color nordic
 "color monokai
 "color catppuccin
-color moonfly
+"color moonfly
 "color miasma
 "color evergarden
 "color kyotonight
@@ -113,10 +116,10 @@ set confirm
 "set tabstop=4
 set title
 set mouse=a
-set relativenumber
+"set relativenumber
 "syntax on
 filetype on
-"set termguicolors
+set termguicolors
 set expandtab
 set shiftwidth=2
 "set encoding=UTF-8
@@ -150,6 +153,12 @@ let g:WebDevIconsUnicodeDecorateFileNodes = 1
 "let g:minimap_highlight = 'MinimapCurrentLine'
 "let g:minimap_highlight_range = 1
 
+" Inicializa o colorizer
+lua require'colorizer'.setup()
+
+" Ativa o Colorizer automaticamente em cada buffer aberto ou criado
+autocmd BufReadPost,BufNewFile * lua require'colorizer'.attach_to_buffer(0)
+
 "Terminal
 nnoremap <leader>t :vsplit term://zsh<cr>A
 
@@ -171,6 +180,7 @@ xmap <C-/>   <Plug>NERDCommenterToggle<CR>
 
 "Map
 map q :q<CR>
+map y :ColorizerToggle<CR>
 map <C-q> :q!<CR>
 map <C-s> :w!<CR>
 map t :Tutor<CR>
@@ -223,8 +233,6 @@ nmap <C-p> <Plug>MarkdownPreviewToggle
 "<C-g>u breaks current undo, please make your own choice.
 inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
-
 
 "Lualine
 lua << END
