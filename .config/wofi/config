@@ -1,12 +1,11 @@
+# Configurações gerais.
+mode = drun
+insensitive = true
+location = 0  # 0 corresponde ao centro da tela
+x = 650         # Deslocamento horizontal (0 para centralizar)
+y = 297        # Deslocamento vertical (0 para centralizar)
 
-# General settings.
-mode=drun
-insensitive=true
-location=2
-y=100
-
-# Appearance.
-prompt=
-height=50%
-width=50%
-
+# Aparência.
+prompt =
+height = 30%
+width = 35%
