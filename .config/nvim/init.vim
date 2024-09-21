@@ -5,87 +5,40 @@
 " ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║
 " ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝
 
-" =============================================================================
+" =======================================================
+"                         VIM-PLUG
+"       https://github.com/junegunn/vim-plug#neovim
+" =======================================================
 
-"Vim-Plug
-"https://github.com/junegunn/vim-plug#neovim
+" Franklin Souza
+" @frannksz
 
-" //////////////////////////////////////////////////////
+" =======================================================
+"                         PLUGINS
+" =======================================================
 
 call plug#begin('~/.config/nvim/plugged')
 
-"Auto-Complete
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'} "Auto-Complete
+Plug 'preservim/nerdcommenter' "NerdCommenter
+Plug 'ryanoasis/vim-devicons' "Icons File Manager
+Plug 'preservim/nerdtree' "NerdTree
+Plug 'sheerun/vim-polyglot' "Syntax
+Plug 'tc50cal/vim-terminal' "Terminal
+Plug 'dense-analysis/ale' "Syntax Check
+Plug 'nvim-tree/nvim-web-devicons' "WebDevIcons
+Plug 'nvim-lualine/lualine.nvim' "Lualine
+Plug 'AlphaTechnolog/pywal.nvim', { 'as': 'pywal' } "LualinePywal
+Plug '907th/vim-auto-save' "AutoSave
+Plug 'lukas-reineke/indent-blankline.nvim' "Indent Blank
+Plug 'nvim-lua/plenary.nvim' "Indent Blank
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' } "Indent Blank
+Plug 'tamton-aquib/staline.nvim' "Statusline
+Plug 'norcalli/nvim-colorizer.lua' "Colorizer
 
-"Commenter
-Plug 'preservim/nerdcommenter'
-
-"Icons File Manager
-Plug 'ryanoasis/vim-devicons'
-
-"NerdTree
-Plug 'preservim/nerdtree'
-
-"Syntax
-Plug 'sheerun/vim-polyglot'
-
-"Terminal
-Plug 'tc50cal/vim-terminal'
-
-"Multiple Cursores
-Plug 'terryma/vim-multiple-cursors'
-
-"Syntax Check
-Plug 'dense-analysis/ale'
-
-"VirtualEnv
-Plug 'jmcantrell/vim-virtualenv'
-
-"WebDevIcons
-Plug 'nvim-tree/nvim-web-devicons'
-
-"Lualine
-Plug 'nvim-lualine/lualine.nvim'
-
-"Lualine-Pywal
-Plug 'AlphaTechnolog/pywal.nvim', { 'as': 'pywal' }
-
-"Minimap
-"Plug 'koron/minimap-vim'
-"Plug 'wfxr/minimap.vim'
-
-"AutoSave
-Plug '907th/vim-auto-save'
-
-"QuickRun
-Plug 'thinca/vim-quickrun'
-
-"Fzf
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-
-"Indent Blank
-Plug 'lukas-reineke/indent-blankline.nvim'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
-
-"Statusline
-Plug 'tamton-aquib/staline.nvim'
-
-"Scrolling
-Plug 'karb94/neoscroll.nvim'
-
-"Markdown
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npx --yes yarn install' }
-
-"HTML
-Plug 'mattn/emmet-vim'
-
-"Colorizer
-Plug 'norcalli/nvim-colorizer.lua'
-
-"Themes
+" =======================================================
+"                           THEMES
+" =======================================================
 Plug 'morhetz/gruvbox'
 Plug 'navarasu/onedark.nvim'
 Plug 'tanvirtin/monokai.nvim'
@@ -98,8 +51,9 @@ Plug 'shrikecode/kyotonight.vim'
 
 call plug#end()
 
-"Color
-"--------
+" =======================================================
+"                       THEMES APLLY
+" =======================================================
 "color onedark
 color gruvbox
 "color nordic
@@ -110,14 +64,15 @@ color gruvbox
 "color evergarden
 "color kyotonight
 
-"Cursor
+" =======================================================
+"                       CONFIGS NEOVIM
+" =======================================================
 set cursorline
 highlight clear CursorLine
 highlight CursorLine ctermbg=235
-
-"Set Nvim
-set number
 "set incsearch
+"set relativenumber
+set number
 set autoindent
 set wildmenu
 set laststatus=2
@@ -125,8 +80,7 @@ set confirm
 "set tabstop=4
 set title
 set mouse=a
-"set relativenumber
-"syntax on
+syntax on
 filetype on
 set termguicolors
 set expandtab
@@ -134,7 +88,6 @@ set shiftwidth=2
 "set encoding=UTF-8
 set encoding=utf-8
 set autowrite
-"set cursorline
 set noswapfile
 set hidden
 set inccommand=split
@@ -143,54 +96,43 @@ set clipboard=unnamedplus
 set incsearch ignorecase smartcase hlsearch
 set bg=dark
 
-"Leader Key
-let mapleader="\<space>"
-
+" =======================================================
+"                         NERDTREE
+" =======================================================
 let g:NERDTreeDirArrowExpandable = '▸'
-let g:NERDTreeDirArrowCollapsible = '▾'
+let g:NERDTreeDirArrowCollapsible = ''
 let g:webdevicons_enable = 1
 let g:webdevicons_enable_airline_tabline = 1
 let g:webdevicons_enable_airline_statusline = 1
 let g:WebDevIconsUnicodeGlyphDoubleWidth = 1
 let g:WebDevIconsUnicodeDecorateFileNodes = 1
+nnoremap <C-l> :NERDTreeToggle<CR>
+"=======================================================
 
-" Minimap
-"let g:minimap_width = 20
-"let g:minimap_auto_start = 1
-"let g:minimap_auto_start_win_enter = 1
-"hi MinimapCurrentLine ctermfg=Green guifg=#50FA7B guibg=#32302f
-"let g:minimap_highlight = 'MinimapCurrentLine'
-"let g:minimap_highlight_range = 1
+" =======================================================
+"                        OTHERS CONFIGS
+" =======================================================
+let mapleader="\<space>" "Leader Key
 
-" Inicializa o colorizer
+"Inicializa o colorizer
 lua require'colorizer'.setup()
 
-" Ativa o Colorizer automaticamente em cada buffer aberto ou criado
+"Ativa o Colorizer automaticamente em cada buffer aberto ou criado
 autocmd BufReadPost,BufNewFile * lua require'colorizer'.attach_to_buffer(0)
 
 "Terminal
 nnoremap <leader>t :vsplit term://zsh<cr>A
 
-"Ale
-nnoremap <F9> :ALEFix<cr>
-
-"NerdTree
-nnoremap <C-l> :NERDTreeToggle<CR>
-
 "Duplicate Line
 nnoremap <c-d> <esc>:t.<cr>
-
-"Cgn
-nnoremap <C-c> cgn<cr>
 
 "Comment Code
 nmap <C-/>   <Plug>NERDCommenterToggle
 xmap <C-/>   <Plug>NERDCommenterToggle<CR>
 
-"Map
+"Keyboard map
 map q :q<CR>
 map <C-q> :q!<CR>
-map <C-y> :ColorizerToggle<CR>
 map <C-s> :w!<CR>
 map t :Tutor<CR>
 map r :PlugInstall<CR>
@@ -198,7 +140,6 @@ map <C-k> :vnew<CR>
 map <C-x> :s/$/
 map \ :AutoSaveToggle<CR> 
 map <F8> :colorscheme wal<CR>
-map <C-i> :FZF<CR>
 
 "Mover bloco de código selecionado
 "vnoremap J :m '>+1<CR>gv=gv
@@ -210,46 +151,78 @@ nnoremap <S-Down> :m+<CR>
 inoremap <S-Up> <Esc>:m-2<CR>
 inoremap <S-Down> <Esc>:m+<CR>
 
-"Lista suspensa
-inoremap <silent><expr> <c-space> coc#refresh()
-
 "Definir o atalho para ativar/desativar números de linha
 nnoremap <F2> :set invnumber<CR>
 
 "Definir o atalho para ativar/desativar o relativenumber
 nnoremap <F3> :set relativenumber!<CR>
 
-" ==================================
-" Fonts
-" Aumentar o tamanho da fonte
+"Fonts
+"Aumentar o tamanho da fonte
 nnoremap <C-=> :exe "normal! \<C-w>>"<CR>
-" Diminuir o tamanho da fonte
+"Diminuir o tamanho da fonte
 nnoremap <C--> :exe "normal! \<C-w><"<CR>
 
-" Restaurar o tamanho da fonte para o valor padrão
+"Restaurar o tamanho da fonte para o valor padrão
 nnoremap <C-0> :exe "normal! \<C-w>="<CR>
-
-" ==================================
 
 "Copiar e Colar
 vmap cp "+y
 nmap c "+p
 
-"Markdown
-nmap <C-p> <Plug>MarkdownPreviewToggle
-
-"Make <CR> to accept selected completion item or notify coc.nvim to format
-"<C-g>u breaks current undo, please make your own choice.
 inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
-"Lualine
+" =======================================================
+"                         TELESCOPE
+" =======================================================
+nnoremap <F5> :Telescope<CR>
+nnoremap <F6> :Telescope buffers<CR>
+nnoremap <F7> :Telescope fd<CR>
+
+" =======================================================
+"                 COC-EXTENSIONS-INSTALL
+" =======================================================
+function! CheckAndInstallCocExtensions()
+  " Caminho para o arquivo de verificação
+  let l:install_flag = stdpath('data') . '/coc_extensions_installed'
+
+  " Se o arquivo de verificação existir, não faz nada
+  if filereadable(l:install_flag)
+    return
+  endif
+
+  " Lista de extensões Coc
+  let l:extensions = ['coc-pairs', 'coc-sh', 'coc-python', 'coc-css']
+
+  " Checa e instala as extensões ausentes
+  for l:ext in l:extensions
+    if empty(glob(stdpath('data') . '/plugged/coc.nvim/extensions/node_modules/' . l:ext))
+      execute 'CocInstall ' . l:ext
+    endif
+  endfor
+
+  " Cria o arquivo de verificação após instalar as extensões
+  call writefile([], l:install_flag)
+endfunction
+" =======================================================================================================
+
+"Executa a função uma única vez durante o start do Vim
+autocmd VimEnter * call CheckAndInstallCocExtensions()
+
+"Executa a função durante o start do Vim
+autocmd VimEnter * call CheckAndInstallCocExtensions()
+
+" =======================================================
+"                       LUALINE
+" =======================================================
 lua << END
 require('lualine').setup{
   options = {
   theme = 'pywal-nvim',
   icons_enable = true,
   section_separators = { left = '', right = '' },
-  component_separators = { left = '', right = '' }
+  component_separators = { left = '', right = '' },
+  },
 }
-}
+
