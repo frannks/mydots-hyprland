@@ -48,6 +48,11 @@ Plug 'AlexvZyl/nordic.nvim', { 'branch': 'main' }
 Plug 'xero/miasma.nvim'
 Plug 'comfysage/evergarden'
 Plug 'shrikecode/kyotonight.vim'
+Plug 'romainl/Apprentice'
+Plug 'rose-pine/neovim'
+Plug 'scottmckendry/cyberdream.nvim'
+Plug 'sho-87/kanagawa-paper.nvim'
+Plug 'sainnhe/sonokai'
 
 call plug#end()
 
@@ -55,7 +60,7 @@ call plug#end()
 "                       THEMES APLLY
 " =======================================================
 "color onedark
-color gruvbox
+"color gruvbox
 "color nordic
 "color monokai
 "color catppuccin
@@ -63,6 +68,11 @@ color gruvbox
 "color miasma
 "color evergarden
 "color kyotonight
+"color apprentice
+"color rose-pine-moon
+"color cyberdream
+color kanagawa-paper
+"color sonokai
 
 " =======================================================
 "                       CONFIGS NEOVIM
@@ -184,25 +194,26 @@ nnoremap <F7> :Telescope fd<CR>
 "                 COC-EXTENSIONS-INSTALL
 " =======================================================
 function! CheckAndInstallCocExtensions()
-  " Caminho para o arquivo de verificação
+
+  "Caminho para o arquivo de verificação
   let l:install_flag = stdpath('data') . '/coc_extensions_installed'
 
-  " Se o arquivo de verificação existir, não faz nada
+  "Se o arquivo de verificação existir, não faz nada
   if filereadable(l:install_flag)
     return
   endif
 
-  " Lista de extensões Coc
+  "Lista de extensões Coc
   let l:extensions = ['coc-pairs', 'coc-sh', 'coc-python', 'coc-css']
 
-  " Checa e instala as extensões ausentes
+  "Checa e instala as extensões ausentes
   for l:ext in l:extensions
     if empty(glob(stdpath('data') . '/plugged/coc.nvim/extensions/node_modules/' . l:ext))
       execute 'CocInstall ' . l:ext
     endif
   endfor
 
-  " Cria o arquivo de verificação após instalar as extensões
+  "Cria o arquivo de verificação após instalar as extensões
   call writefile([], l:install_flag)
 endfunction
 " =======================================================================================================
@@ -223,6 +234,10 @@ require('lualine').setup{
   icons_enable = true,
   section_separators = { left = '', right = '' },
   component_separators = { left = '', right = '' },
+  disabled_filetypes = {
+      statusline = {},
+      winbar = {},
+    },
   },
 }
 
