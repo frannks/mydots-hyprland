@@ -80,14 +80,12 @@ color kanagawa-paper
 set cursorline
 highlight clear CursorLine
 highlight CursorLine ctermbg=235
-"set incsearch
-"set relativenumber
+set tabstop=4
 set number
 set autoindent
 set wildmenu
 set laststatus=2
 set confirm
-"set tabstop=4
 set title
 set mouse=a
 syntax on
@@ -95,16 +93,18 @@ filetype on
 set termguicolors
 set expandtab
 set shiftwidth=2
-"set encoding=UTF-8
 set encoding=utf-8
 set autowrite
 set noswapfile
 set hidden
 set inccommand=split
-set guifont=Fira\ Code:9.5
 set clipboard=unnamedplus
 set incsearch ignorecase smartcase hlsearch
 set bg=dark
+set guifont=Fira\ Code:12
+"set incsearch
+"set encoding=UTF-8
+"set relativenumber
 
 " =======================================================
 "                         NERDTREE
@@ -141,7 +141,7 @@ nmap <C-/>   <Plug>NERDCommenterToggle
 xmap <C-/>   <Plug>NERDCommenterToggle<CR>
 
 "Keyboard map
-map q :q<CR>
+map q :wq!<CR>
 map <C-q> :q!<CR>
 map <C-s> :w!<CR>
 map t :Tutor<CR>
@@ -167,19 +167,11 @@ nnoremap <F2> :set invnumber<CR>
 "Definir o atalho para ativar/desativar o relativenumber
 nnoremap <F3> :set relativenumber!<CR>
 
-"Fonts
-"Aumentar o tamanho da fonte
-nnoremap <C-=> :exe "normal! \<C-w>>"<CR>
-"Diminuir o tamanho da fonte
-nnoremap <C--> :exe "normal! \<C-w><"<CR>
-
-"Restaurar o tamanho da fonte para o valor padrão
-nnoremap <C-0> :exe "normal! \<C-w>="<CR>
-
 "Copiar e Colar
 vmap cp "+y
 nmap c "+p
 
+"AutoComplete
 inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
