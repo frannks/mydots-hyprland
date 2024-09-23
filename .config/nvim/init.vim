@@ -35,6 +35,7 @@ Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' } "Indent Blank
 Plug 'tamton-aquib/staline.nvim' "Statusline
 Plug 'norcalli/nvim-colorizer.lua' "Colorizer
 Plug 'https://github.com/itchyny/calendar.vim' "Calendar
+Plug 'akinsho/bufferline.nvim', { 'tag': '*' } "Bufferline
 
 " =======================================================
 "                           THEMES
@@ -53,14 +54,16 @@ Plug 'rose-pine/neovim'
 Plug 'scottmckendry/cyberdream.nvim'
 Plug 'sho-87/kanagawa-paper.nvim'
 Plug 'sainnhe/sonokai'
+Plug 'qaptoR-nvim/chocolatier.nvim'
 
 call plug#end()
 
 " =======================================================
 "                       THEMES APLLY
 " =======================================================
+set bg=dark "litght (Tema Claro), dark (Tema Escuro)
 "color onedark
-"color gruvbox
+color gruvbox
 "color nordic
 "color monokai
 "color catppuccin
@@ -71,8 +74,9 @@ call plug#end()
 "color apprentice
 "color rose-pine-moon
 "color cyberdream
-color kanagawa-paper
+"color kanagawa-paper
 "color sonokai
+"color chocolatier
 
 " =======================================================
 "                       CONFIGS NEOVIM
@@ -100,7 +104,6 @@ set hidden
 set inccommand=split
 set clipboard=unnamedplus
 set incsearch ignorecase smartcase hlsearch
-set bg=dark
 set guifont=Fira\ Code:12
 "set incsearch
 "set encoding=UTF-8
@@ -124,12 +127,6 @@ nnoremap <C-l> :NERDTreeToggle<CR>
 " =======================================================
 let mapleader="\<space>" "Leader Key
 
-"Inicializa o colorizer
-lua require'colorizer'.setup()
-
-"Ativa o Colorizer automaticamente em cada buffer aberto ou criado
-autocmd BufReadPost,BufNewFile * lua require'colorizer'.attach_to_buffer(0)
-
 "Terminal
 nnoremap <leader>t :vsplit term://zsh<cr>A
 
@@ -144,7 +141,6 @@ xmap <C-/>   <Plug>NERDCommenterToggle<CR>
 map <C-q> :q!<CR>
 map <C-c> :Calendar<CR>
 map <C-s> :w!<CR>
-map <C-k> :vnew<CR>
 map <C-x> :s/$/
 map <C-i> :ShowEmoji<CR>
 map <F8> :colorscheme wal<CR>
@@ -152,6 +148,16 @@ map \ :AutoSaveToggle<CR>
 map q :q<CR>
 map r :PlugInstall<CR>
 map t :Tutor<CR>
+
+nnoremap <C-k> :call OpenVnewInput()<CR>
+
+function! OpenVnewInput()
+  let l:filename = input("Digite o nome do arquivo: ", '', 'file')
+  if !empty(l:filename)
+    execute "vnew " . l:filename
+  endif
+endfunction
+
 
 "Mover bloco de código selecionado
 "vnoremap J :m '>+1<CR>gv=gv
@@ -210,7 +216,6 @@ function! CheckAndInstallCocExtensions()
   "Cria o arquivo de verificação após instalar as extensões
   call writefile([], l:install_flag)
 endfunction
-" =======================================================================================================
 
 "Executa a função uma única vez durante o start do Vim
 autocmd VimEnter * call CheckAndInstallCocExtensions()
@@ -218,20 +223,11 @@ autocmd VimEnter * call CheckAndInstallCocExtensions()
 "Executa a função durante o start do Vim
 autocmd VimEnter * call CheckAndInstallCocExtensions()
 
-" =======================================================
-"                       LUALINE
-" =======================================================
-lua << END
-require('lualine').setup{
-  options = {
-  theme = 'pywal-nvim',
-  icons_enable = true,
-  section_separators = { left = '', right = '' },
-  component_separators = { left = '', right = '' },
-  disabled_filetypes = {
-      statusline = {},
-      winbar = {},
-    },
-  },
-}
+" ======================================================================================================
 
+" =======================================================
+"                       LUA-PLUGINS
+" =======================================================
+lua dofile(vim.fn.stdpath('config') .. '/lua-plugins/lualine.lua')
+lua dofile(vim.fn.stdpath('config') .. '/lua-plugins/colorizer.lua')
+lua dofile(vim.fn.stdpath('config') .. '/lua-plugins/bufferline.lua')
