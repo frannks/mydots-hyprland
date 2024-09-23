@@ -45,7 +45,7 @@
     },
     "clock": {
     	  "timezone" : "America/Sao_Paulo",
-        "format": "  {:%I:%M %p}",
+        "format": "  {:%I:%M %p}",
         "format-alt": "  {:%a, %d %b %Y}",
         "interval" : "60",
         "tooltip-format": "<tt><small>{calendar}</small></tt>",
@@ -110,8 +110,9 @@
     "custom/powermenu": {
     "format": "  ",
     "tooltip": false,
-    "on-click": "exec /home/frank/.config/waybar/scripts/./powermenu.sh",
-    },
+    "on-click": "exec $HOME/.config/waybar/scripts/powermenu.sh",
+},
+
     "custom/colorpicker": {
         "format": "",
         "tooltip": false,

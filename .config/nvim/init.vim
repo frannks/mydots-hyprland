@@ -12,7 +12,6 @@
 
 " Franklin Souza
 " @frannksz
-
 " =======================================================
 "                         PLUGINS
 " =======================================================
@@ -35,6 +34,7 @@ Plug 'nvim-lua/plenary.nvim' "Indent Blank
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' } "Indent Blank
 Plug 'tamton-aquib/staline.nvim' "Statusline
 Plug 'norcalli/nvim-colorizer.lua' "Colorizer
+Plug 'https://github.com/itchyny/calendar.vim' "Calendar
 
 " =======================================================
 "                           THEMES
@@ -141,15 +141,17 @@ nmap <C-/>   <Plug>NERDCommenterToggle
 xmap <C-/>   <Plug>NERDCommenterToggle<CR>
 
 "Keyboard map
-map q :wq!<CR>
 map <C-q> :q!<CR>
+map <C-c> :Calendar<CR>
 map <C-s> :w!<CR>
-map t :Tutor<CR>
-map r :PlugInstall<CR>
 map <C-k> :vnew<CR>
 map <C-x> :s/$/
-map \ :AutoSaveToggle<CR> 
+map <C-i> :ShowEmoji<CR>
 map <F8> :colorscheme wal<CR>
+map \ :AutoSaveToggle<CR> 
+map q :q<CR>
+map r :PlugInstall<CR>
+map t :Tutor<CR>
 
 "Mover bloco de código selecionado
 "vnoremap J :m '>+1<CR>gv=gv

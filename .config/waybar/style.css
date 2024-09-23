@@ -37,7 +37,7 @@ border-radius: 16px;
 
 #workspaces button.active {
     color: #269cb6;
-    background: @workspacesbackground2;
+    background: transparent; /* substitua pelo valor correto */
 }
 
 #workspaces button:hover {
