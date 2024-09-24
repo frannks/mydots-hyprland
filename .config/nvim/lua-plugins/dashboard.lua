@@ -44,6 +44,15 @@ db.setup({
                 action = 'Telescope find_files',
             },
             {
+                icon = ' ',
+                desc = 'Old Files',
+                key = 'o',
+                keymap = 'SPC o',
+                key_format = ' %s',
+                action = 'Telescope oldfiles',
+            },
+
+            {
                 icon = ' ',
                 desc = 'Configure Neovim    ',
                 key = 'c',
