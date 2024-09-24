@@ -31,11 +31,15 @@ Plug 'AlphaTechnolog/pywal.nvim', { 'as': 'pywal' } "LualinePywal
 Plug '907th/vim-auto-save' "AutoSave
 Plug 'lukas-reineke/indent-blankline.nvim' "Indent Blank
 Plug 'nvim-lua/plenary.nvim' "Indent Blank
+Plug 'nvim-telescope/telescope-file-browser.nvim' "Telescope
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' } "Indent Blank
 Plug 'tamton-aquib/staline.nvim' "Statusline
 Plug 'norcalli/nvim-colorizer.lua' "Colorizer
 Plug 'https://github.com/itchyny/calendar.vim' "Calendar
 Plug 'akinsho/bufferline.nvim', { 'tag': '*' } "Bufferline
+Plug 'zaldih/themery.nvim' "Themery
+Plug 'nvimdev/dashboard-nvim' "Dashboard
+Plug 'mfussenegger/nvim-dap' "Nvim-Dap
 
 " =======================================================
 "                           THEMES
@@ -55,6 +59,7 @@ Plug 'scottmckendry/cyberdream.nvim'
 Plug 'sho-87/kanagawa-paper.nvim'
 Plug 'sainnhe/sonokai'
 Plug 'qaptoR-nvim/chocolatier.nvim'
+Plug 'Mofiqul/dracula.nvim'
 
 call plug#end()
 
@@ -63,7 +68,7 @@ call plug#end()
 " =======================================================
 set bg=dark "litght (Tema Claro), dark (Tema Escuro)
 "color onedark
-color gruvbox
+"color gruvbox
 "color nordic
 "color monokai
 "color catppuccin
@@ -77,6 +82,8 @@ color gruvbox
 "color kanagawa-paper
 "color sonokai
 "color chocolatier
+"color dracula
+"color dracula-soft
 
 " =======================================================
 "                       CONFIGS NEOVIM
@@ -138,6 +145,7 @@ nmap <C-/>   <Plug>NERDCommenterToggle
 xmap <C-/>   <Plug>NERDCommenterToggle<CR>
 
 "Keyboard map
+map <C-t> :Themery<CR>
 map <C-q> :q!<CR>
 map <C-c> :Calendar<CR>
 map <C-s> :w!<CR>
@@ -190,6 +198,15 @@ nnoremap <F5> :Telescope<CR>
 nnoremap <F6> :Telescope buffers<CR>
 nnoremap <F7> :Telescope fd<CR>
 
+" Mapeia a tecla <space>fb para abrir o file_browser do Telescope
+nnoremap <silent> <space>fb :Telescope file_browser<CR>
+
+" Abre o file_browser com o caminho do buffer atual
+nnoremap <silent> <space>fb :Telescope file_browser path=%:p:h select_buffer=true<CR>
+
+" Alternativamente, usando a API do Lua
+nnoremap <silent> <space>fb :lua require("telescope").extensions.file_browser.file_browser()<CR>
+
 " =======================================================
 "                 COC-EXTENSIONS-INSTALL
 " =======================================================
@@ -222,7 +239,6 @@ autocmd VimEnter * call CheckAndInstallCocExtensions()
 
 "Executa a função durante o start do Vim
 autocmd VimEnter * call CheckAndInstallCocExtensions()
-
 " ======================================================================================================
 
 " =======================================================
@@ -231,3 +247,5 @@ autocmd VimEnter * call CheckAndInstallCocExtensions()
 lua dofile(vim.fn.stdpath('config') .. '/lua-plugins/lualine.lua')
 lua dofile(vim.fn.stdpath('config') .. '/lua-plugins/colorizer.lua')
 lua dofile(vim.fn.stdpath('config') .. '/lua-plugins/bufferline.lua')
+lua dofile(vim.fn.stdpath('config') .. '/lua-plugins/themery.lua')
+lua dofile(vim.fn.stdpath('config') .. '/lua-plugins/dashboard.lua')
