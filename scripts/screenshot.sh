@@ -18,30 +18,35 @@ show_notification() {
 
 # Função para tirar print de toda a tela e salvar
 take_full_screen() {
-    grim "$screenshot_dir/screenshot-$(date +%Y%m%d%H%M%S).png"
-    show_notification "Print de tela salvo em $screenshot_dir" && mpv $SOUND
+    screenshot_file="$screenshot_dir/screenshot-$(date +%Y%m%d%H%M%S).png"
+    grim "$screenshot_file"
+    swappy -f "$screenshot_file" && show_notification "Print de tela salvo em $screenshot_file" && mpv "$SOUND"
 }
 
-# Função para tirar print de toda a tela, copiar para o clipboard e salvar
+# Função para tirar print de toda a tela, copiar para o clipboard e abrir no Swappy
 take_full_screen_to_clipboard() {
-    grim - | wl-copy
-    show_notification "Print de tela no clipboard" && mpv $SOUND
+    screenshot_file="$screenshot_dir/screenshot-$(date +%Y%m%d%H%M%S).png"
+    grim "$screenshot_file" && wl-copy < "$screenshot_file"
+    swappy -f "$screenshot_file" && show_notification "Print de tela copiado para o clipboard" && mpv "$SOUND"
 }
 
 # Função para recortar print e salvar
 crop_screen() {
     # Usando slurp para selecionar uma região da tela
     geometry=$(slurp)
-    grim -g "$geometry" "$screenshot_dir/cropped-$(date +%Y%m%d%H%M%S).png"
-    show_notification "Recorte de tela salvo em $screenshot_dir" && mpv $SOUND
+    screenshot_file="$screenshot_dir/cropped-$(date +%Y%m%d%H%M%S).png"
+    grim -g "$geometry" "$screenshot_file"
+    swappy -f "$screenshot_file" && show_notification "Recorte de tela salvo em $screenshot_file" && mpv "$SOUND"
 }
 
-# Função para recortar print, copiar para o clipboard e salvar
+# Função para recortar print, copiar para o clipboard e abrir no Swappy
 crop_screen_to_clipboard() {
     # Usando slurp para selecionar uma região da tela
     geometry=$(slurp)
-    grim -g "$geometry" - | wl-copy
-    show_notification "Recorte de tela no clipboard" && mpv $SOUND
+    screenshot_file="$screenshot_dir/cropped-$(date +%Y%m%d%H%M%S).png"
+    grim -g "$geometry" "$screenshot_file"
+    wl-copy < "$screenshot_file"  # Copia para o clipboard
+    swappy -f "$screenshot_file" && show_notification "Recorte de tela copiado para o clipboard" && mpv "$SOUND"
 }
 
 # Opções do menu
@@ -71,4 +76,5 @@ case "$selected_option" in
         echo "Opção inválida"
         ;;
 esac
+ChatGPT said:
 
