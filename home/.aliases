@@ -1,15 +1,19 @@
-# My aliases
+#  ▄▄▄       ██▓     ██▓ ▄▄▄        ██████ ▓█████   ██████ 
+# ▒████▄    ▓██▒    ▓██▒▒████▄    ▒██    ▒ ▓█   ▀ ▒██    ▒ 
+# ▒██  ▀█▄  ▒██░    ▒██▒▒██  ▀█▄  ░ ▓██▄   ▒███   ░ ▓██▄   
+# ░██▄▄▄▄██ ▒██░    ░██░░██▄▄▄▄██   ▒   ██▒▒▓█  ▄   ▒   ██▒
+#  ▓█   ▓██▒░██████▒░██░ ▓█   ▓██▒▒██████▒▒░▒████▒▒██████▒▒
+#  ▒▒   ▓▒█░░ ▒░▓  ░░▓   ▒▒   ▓▒█░▒ ▒▓▒ ▒ ░░░ ▒░ ░▒ ▒▓▒ ▒ ░
+#   ▒   ▒▒ ░░ ░ ▒  ░ ▒ ░  ▒   ▒▒ ░░ ░▒  ░ ░ ░ ░  ░░ ░▒  ░ ░
+#   ░   ▒     ░ ░    ▒ ░  ░   ▒   ░  ░  ░     ░   ░  ░  ░  
+#       ░  ░    ░  ░ ░        ░  ░      ░     ░  ░      ░  
+                                              
+# Franklin Souza
+# @frannksz
 
-alias asp="$HOME/.local/bin/arch_snapshot"
-alias add='sudo $HOME/.local/bin/snap-pac'
-alias up='sudo $HOME/.local/bin/arch_update_snapshot '
-alias pkg='pacman -Ss'
-alias pkg1='pacseek'
-alias del='sudo pacman -Rns'
-alias zshrc='$EDITOR ~/.zshrc && source ~/.zshrc'
-alias vk='VK_INSTANCE_LAYERS=VK_LAYER_MESA_overlay vkcube'
-alias vk1='mangohud VK_INSTANCE_LAYERS=VK_LAYER_MESA_overlay vkcube'
-alias icon1='sudo pacman -S papirus-icon-theme --noconfirm'
+# =======================================
+#                GIT                    
+# =======================================
 alias gc='git clone'
 alias gs='git status'
 alias ga='git add'
@@ -17,17 +21,39 @@ alias gd='git diff | less'
 alias gr='git restore --staged'
 alias gm='git commit -m'
 alias gp='git push origin main'
-alias aliases='nvim ~/.aliases'
+
+# =======================================
+#            PACMAN/SNAPSHOTS                    
+# =======================================
+alias asp="$HOME/.local/bin/arch_snapshot"
+alias add='sudo $HOME/.local/bin/snap-pac'
+alias up='sudo $HOME/.local/bin/arch_update_snapshot '
+alias pkg='pacman -Ss'
+alias rs="sudo $HOME/.local/bin/remove_snapshot"
+alias del='sudo pacman -Rns'
 alias cache='ls /var/cache/pacman/pkg | wc -l && du -sh /var/cache/pacman/pkg'
-alias sa='systemd-analyze'
-alias aur='pacman -Qm'
+alias plog='cat /var/log/pacman.log | grep "installed\|upgraded" | less'
+
+# =======================================
+#               SYSTEMD                    
+# =======================================
+alias sf="systemctl --failed"
+alias status="systemctl status"
+alias on="sudo systemctl enable"
+alias stop="sudo systemctl stop"
+alias off="sudo systemctl disable"
+alias restart="sudo systemctl restart"
+alias logs="journalctl --vacuum-time=1w"
+
+# =======================================
+#               OUTROS                    
+# =======================================
+alias vk='mangohud VK_INSTANCE_LAYERS=VK_LAYER_MESA_overlay vkcube'
 alias ptam='df -h /dev/sdb1'
 alias iso='df -h /dev/sdb'
 alias ls='lsd'
 alias lsa='lsd -lha'
-alias mkdir='mkdir -v'
 alias pdf='$HOME/.projects/Zathura-Pywal/zathura'
-alias cpu="clear && ps -A --sort -rsz -o pid,comm,pmem,pcpu|awk 'NR<=20'"
 alias ug='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 alias fonts='clear && kitty list-fonts'
 alias py3='python3'
@@ -35,48 +61,26 @@ alias hd1='clear && sudo hdsentinel'
 alias hd2='clear && sudo smartctl -a /dev/sda'
 alias disks='clear && echo "╓───── d i s k . u s a g e"; echo "╙────────────────────────────────────── ─ ─ ";
  df -h;'
-alias emojis="$EDITOR ~/.emojis"
 alias usb='lsusb'
 alias q='exit'
 alias rice='clear && curl -L "https://git.io/rice"'
 alias c='clear'
 alias sts='curl -fsSL https://starship.rs/install.sh | sh'
-alias win='timedatectl set-local-rtc 1'
 alias ytd='$HOME/Scripts/ytdown.sh'
 alias pasters='$HOME/Scripts/paste.sh'
 alias pass='$HOME/Scripts/senha.sh'
 alias senha='python3 $HOME/Scripts/pass.py'
 alias tg="tetriscurses"
 alias delt="rm -rf ~/Downloads/Telegram\ Desktop"
-alias sf="systemctl --failed"
 alias img="kitty +kitten icat"
 alias p="p10k configure"
-alias ...="source"
-alias d="deactivate"
 alias pyv="~/Scripts/pyvenv.sh"
-alias status="systemctl status"
-alias restart="sudo systemctl restart"
-alias on="sudo systemctl enable"
-alias bin="cd ~/.local/bin"
-alias rb="reboot"
-alias stop="sudo systemctl stop"
-alias scan="clamscan"
 alias list="clear && sudo btrfs subvolume list /"
-alias logs="journalctl --vacuum-time=1w"
 alias inf="clear && inxi -bGI"
 alias dm="sudo dmesg"
-alias off="sudo systemctl disable"
 alias st="clear && speedtest"
 alias rom="$HOME/Scripts/StockROM.sh"
-alias cpum='watch -n1 "cat /proc/cpuinfo | grep \"^[c]pu MHz\""'
-alias rs="sudo $HOME/.local/bin/remove_snapshot"
-alias sysf="~/Scripts/sysfetch.sh"
 alias pyroot="sudo cp -r $HOME/.cache/wal /root/.cache"
-alias check="sha256sum"
-alias wh="which"
-alias diff="diff --color"
-alias diff1="nvim -d"
-alias diff2="sudo nvim -d"
 alias j="archlinux-java status"
 alias gpu="lspci -k | grep -EA2 "VGA""
 alias less='nvim -R'
@@ -90,21 +94,15 @@ alias cel='$HOME/Scripts/cel-mount.sh'
 alias cel1='$HOME/Scripts/scrcpy-cli.sh'
 alias cel2='cel_mount'
 alias yt='ytfzf --pages=30 -t "$@"'
-alias lsk='lsblk'
-alias plog='cat /var/log/pacman.log | grep "installed\|upgraded" | less'
 alias m='$HOME/.local/bin/minecoord.sh'
 alias fh='watch free -h'
 alias h='htop'
 alias tam='du -h'
-alias f='free -h'
-alias s='$HOME/Scripts/sysfetch'
-alias way='sudo $HOME/Scripts/waydroid.sh'
+alias s='$HOME/Scripts/sysfetch.sh'
 alias sht='$HOME/Scripts/short.sh'
 alias pendrive='sudo $HOME/.local/bin/pendrive'
-alias ll='ls -1'
-alias power='$HOME/.config/waybar/scripts/powermenu.sh'
 alias neofetch='fastfetch'
-alias conv='$HOME/Scripts/converter.sh'
 alias mirror='sudo $HOME/.local/bin/mirror'
 alias hc='hyprctl clients'
 alias fetch1='clear && python3 ~/Scripts/sysinfo.py'
+alias g='clear && gruvbox-factory -i "$@"'
