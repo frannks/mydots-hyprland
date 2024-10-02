@@ -18,7 +18,7 @@
     "margin-bottom": 0,
     "modules-left": ["hyprland/workspaces", "custom/spotify", "hyprland/window"],
     "modules-center": ["cpu", "memory", "temperature"],
-    "modules-right": ["custom/check_updates", "pulseaudio", "custom/colorpicker", "custom/mic_status", "custom/recorder", "clock", "tray", "custom/powermenu"],
+    "modules-right": ["custom/check_updates", "pulseaudio", "custom/colorpicker", "custom/mic_status", "custom/recorder", "custom/screenshot","clock", "tray", "custom/powermenu"],
 
 
    "hyprland/workspaces": {
@@ -169,6 +169,11 @@
     "on-click": "/home/frank/.config/waybar/scripts/wfrecord.sh",
     "on-click-right": "pgrep -x wf-recorder > /dev/null && (killall wf-recorder && notify-send 'Wf-Recorder' 'Gravação finalizada')",
     "signal": 8,
+    },
+
+     "custom/screenshot": {
+    "format": "{}",
+    "on-click": "/home/frank/Scripts/screenshot.sh",
     },
 
   "hyprland/window": {
