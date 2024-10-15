@@ -137,7 +137,6 @@ nnoremap <C-l> :NERDTreeToggle<CR>
 " =======================================================
 "                        OTHERS CONFIGS
 " =======================================================
-
 "Pyright
 lua << EOF
 require"mason".setup {}
@@ -153,12 +152,13 @@ nnoremap <leader>t :vsplit term://zsh<cr>A
 nnoremap <c-d> <esc>:t.<cr>
 
 "Comment Code
-nmap <C-/>   <Plug>NERDCommenterToggle
-xmap <C-/>   <Plug>NERDCommenterToggle<CR>
+nmap <C-/> <Plug>NERDCommenterToggle
+xmap <C-/> <Plug>NERDCommenterToggle
 
 "Keyboard map
 map <C-t> :Themery<CR>
 map <C-m> :Mason<CR>
+map <C-p> :MasonUpdate<CR>
 map <C-q> :q!<CR>
 map <C-c> :Calendar<CR>
 map <C-s> :w!<CR>
