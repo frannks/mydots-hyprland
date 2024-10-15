@@ -10,8 +10,9 @@
 "       https://github.com/junegunn/vim-plug#neovim
 " =======================================================
 
-" Franklin Souza
-" @frannksz
+"                     Franklin Souza
+"                       @frannksz
+"
 " =======================================================
 "                         PLUGINS
 " =======================================================
@@ -40,6 +41,10 @@ Plug 'akinsho/bufferline.nvim', { 'tag': '*' } "Bufferline
 Plug 'zaldih/themery.nvim' "Themery
 Plug 'nvimdev/dashboard-nvim' "Dashboard
 Plug 'mfussenegger/nvim-dap' "Nvim-Dap
+Plug 'neovim/nvim-lspconfig' "Nvim-Lspconfig
+Plug 'williamboman/mason.nvim'
+Plug 'williamboman/mason-lspconfig.nvim'
+call plug#end()
 
 " =======================================================
 "                           THEMES
@@ -132,6 +137,13 @@ nnoremap <C-l> :NERDTreeToggle<CR>
 " =======================================================
 "                        OTHERS CONFIGS
 " =======================================================
+
+"Pyright
+lua << EOF
+require"mason".setup {}
+require 'lspconfig'.pyright.setup {}
+EOF
+
 let mapleader="\<space>" "Leader Key
 
 "Terminal
@@ -146,6 +158,7 @@ xmap <C-/>   <Plug>NERDCommenterToggle<CR>
 
 "Keyboard map
 map <C-t> :Themery<CR>
+map <C-m> :Mason<CR>
 map <C-q> :q!<CR>
 map <C-c> :Calendar<CR>
 map <C-s> :w!<CR>
@@ -183,6 +196,9 @@ nnoremap <F2> :set invnumber<CR>
 "Definir o atalho para ativar/desativar o relativenumber
 nnoremap <F3> :set relativenumber!<CR>
 
+"Desinstalar pacote mason
+nnoremap <C-u> :MasonUninstall<Space>
+
 "Copiar e Colar
 vmap cp "+y
 nmap c "+p
@@ -206,40 +222,6 @@ nnoremap <silent> <space>fb :Telescope file_browser path=%:p:h select_buffer=tru
 
 " Alternativamente, usando a API do Lua
 nnoremap <silent> <space>fb :lua require("telescope").extensions.file_browser.file_browser()<CR>
-
-" =======================================================
-"                 COC-EXTENSIONS-INSTALL
-" =======================================================
-function! CheckAndInstallCocExtensions()
-
-  "Caminho para o arquivo de verificação
-  let l:install_flag = stdpath('data') . '/coc_extensions_installed'
-
-  "Se o arquivo de verificação existir, não faz nada
-  if filereadable(l:install_flag)
-    return
-  endif
-
-  "Lista de extensões Coc
-  let l:extensions = ['coc-pairs', 'coc-sh', 'coc-python', 'coc-css']
-
-  "Checa e instala as extensões ausentes
-  for l:ext in l:extensions
-    if empty(glob(stdpath('data') . '/plugged/coc.nvim/extensions/node_modules/' . l:ext))
-      execute 'CocInstall ' . l:ext
-    endif
-  endfor
-
-  "Cria o arquivo de verificação após instalar as extensões
-  call writefile([], l:install_flag)
-endfunction
-
-"Executa a função uma única vez durante o start do Vim
-autocmd VimEnter * call CheckAndInstallCocExtensions()
-
-"Executa a função durante o start do Vim
-autocmd VimEnter * call CheckAndInstallCocExtensions()
-" ======================================================================================================
 
 " =======================================================
 "                       LUA-PLUGINS
