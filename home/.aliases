@@ -8,8 +8,8 @@
 #   ░   ▒     ░ ░    ▒ ░  ░   ▒   ░  ░  ░     ░   ░  ░  ░  
 #       ░  ░    ░  ░ ░        ░  ░      ░     ░  ░      ░  
                                               
-# Franklin Souza
-# @frannksz
+#                   Franklin Souza
+#                      @frannksz
 
 # =======================================
 #                GIT                    
@@ -48,6 +48,8 @@ alias logs="journalctl --vacuum-time=1w"
 # =======================================
 #               OUTROS                    
 # =======================================
+alias won='source activate'
+alias woff='deactivate'
 alias vk='mangohud VK_INSTANCE_LAYERS=VK_LAYER_MESA_overlay vkcube'
 alias ptam='df -h /dev/sdb1'
 alias iso='df -h /dev/sdb'
@@ -106,3 +108,7 @@ alias mirror='sudo $HOME/.local/bin/mirror'
 alias hc='hyprctl clients'
 alias fetch1='clear && python3 ~/Scripts/sysinfo.py'
 alias g='clear && gruvbox-factory -i "$@"'
+alias irc='irssi'
+alias vph='ssh -p 7990 frannksz@vaporhole.xyz'
+alias conv='$HOME/Scripts/converter.sh'
+alias tv='mpv --script-opts=iptv=1 "$@"'
